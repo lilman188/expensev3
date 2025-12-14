@@ -63,7 +63,7 @@ public class Database {
 
         return list;
     }
-
+//Beszúrás
     public void addExpense(String name, double amount) {
         try (Connection conn = DriverManager.getConnection(URL);
              PreparedStatement ps = conn.prepareStatement(
@@ -77,7 +77,7 @@ public class Database {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }
-
+//Törlés
     public void deleteExpense(int id) {
         try (Connection conn = DriverManager.getConnection(URL);
              PreparedStatement ps = conn.prepareStatement(
