@@ -1,3 +1,12 @@
+/**
+ * A költségelszámoló alkalmazás fő grafikus ablaka.
+ * <p>
+ * Megjeleníti a költségeket táblázatos formában,
+ * és lehetőséget biztosít új költség hozzáadására
+ * valamint meglévő költségek törlésére.
+ * </p>
+ */
+
 package org.example;
 
 import javax.swing.*;
@@ -10,6 +19,7 @@ public class ExpenseFrame extends JFrame {
     private JTable table;
     private DefaultTableModel model;
 
+    /** Az adatbázis-kezelő objektum */
     public ExpenseFrame() {
         db = new Database();
         setTitle("Költségelszámoló");
@@ -17,7 +27,7 @@ public class ExpenseFrame extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
-        // Táblázat
+        /** Az adatbázis-kezelő objektum */
         model = new DefaultTableModel(new String[]{"ID", "Megnevezés", "Összeg (Ft)"}, 0);
         table = new JTable(model);
         JScrollPane scrollPane = new JScrollPane(table);
@@ -40,7 +50,9 @@ public class ExpenseFrame extends JFrame {
 
         setVisible(true);
     }
-
+    /**
+     * Frissíti a táblázat tartalmát az adatbázisból beolvasott adatokkal.
+     */
     private void refreshTable() {
         model.setRowCount(0);
         List<Expense> expenses = db.getAllExpenses();
@@ -48,7 +60,10 @@ public class ExpenseFrame extends JFrame {
             model.addRow(new Object[]{ex.getId(), ex.getName(), ex.getAmount()});
         }
     }
-
+    /**
+     * Új költséget ad hozzá az adatbázishoz
+     * a felhasználótól bekért adatok alapján.
+     */
     private void addExpense() {
         String name = JOptionPane.showInputDialog(this, "Megnevezés:");
         if (name == null || name.isEmpty()) return;
@@ -62,6 +77,10 @@ public class ExpenseFrame extends JFrame {
             JOptionPane.showMessageDialog(this, "Érvénytelen összeg!", "Hiba", JOptionPane.ERROR_MESSAGE);
         }
     }
+    /**
+     * Törli a felhasználó által kiválasztott költséget
+     * az adatbázisból.
+     */
 
     private void deleteExpense() {
         int row = table.getSelectedRow();

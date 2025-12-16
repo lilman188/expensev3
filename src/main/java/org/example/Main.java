@@ -1,3 +1,11 @@
+/**
+ * A program belépési pontja.
+ * <p>
+ * Elindítja a grafikus felhasználói felületet (Swing),
+ * és létrehozza az {@link ExpenseFrame} ablakot.
+ * </p>
+ */
+
 package org.example;
 
 import javax.swing.SwingUtilities;

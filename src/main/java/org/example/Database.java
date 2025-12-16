@@ -9,11 +9,20 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * Az adatbázis-kezelésért felelős osztály.
+ * <p>
+ * SQLite adatbázist használ a költségek
+ * tárolására, lekérdezésére és törlésére.
+ * </p>
+ */
 public class Database {
 
     private static final String URL = "jdbc:sqlite:expenses.db";
-
+    /**
+     * Inicializálja az adatbázist és létrehozza
+     * az expenses táblát, ha még nem létezik.
+     */
     public Database() {
         try {
             // SQLite driver betöltése
@@ -41,7 +50,11 @@ public class Database {
             );
         }
     }
-
+    /**
+     * Lekérdezi az összes költséget az adatbázisból.
+     *
+     * @return a költségek listája
+     */
     public List<Expense> getAllExpenses() {
         List<Expense> list = new ArrayList<>();
 
@@ -63,7 +76,12 @@ public class Database {
 
         return list;
     }
-
+    /**
+     * Új költséget szúr be az adatbázisba.
+     *
+     * @param name a költség megnevezése
+     * @param amount a költség összege
+     */
     public void addExpense(String name, double amount) {
         try (Connection conn = DriverManager.getConnection(URL);
              PreparedStatement ps = conn.prepareStatement(
@@ -77,7 +95,11 @@ public class Database {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }
-
+    /**
+     * Töröl egy költséget az adatbázisból azonosító alapján.
+     *
+     * @param id a törlendő költség azonosítója
+     */
     public void deleteExpense(int id) {
         try (Connection conn = DriverManager.getConnection(URL);
              PreparedStatement ps = conn.prepareStatement(
