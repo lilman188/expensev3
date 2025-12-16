@@ -25,12 +25,12 @@ public class Database {
      */
     public Database() {
         try {
-            // SQLite driver betöltése
+            // SQLite driver betöltése, ideiglenes tár
             Class.forName("org.sqlite.JDBC");
 
             Connection conn = DriverManager.getConnection(URL);
             Statement stmt = conn.createStatement();
-
+// táblák létrehozása
             stmt.execute("""
                 CREATE TABLE IF NOT EXISTS expenses (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
