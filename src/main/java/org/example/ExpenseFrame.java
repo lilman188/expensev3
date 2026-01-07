@@ -118,7 +118,7 @@ public class ExpenseFrame extends JFrame {
 
             // Fejléc
             Row header = sheet.createRow(0);
-            String[] columns = {"ID", "Megnevezés", "Összeg (Ft)"};
+            String[] columns = {"ID", "Összeg (Ft)", "Megnevezés"};
 
             CellStyle boldStyle = workbook.createCellStyle();
             org.apache.poi.ss.usermodel.Font font = workbook.createFont(); // POI Font teljesen kvalifikált
@@ -136,8 +136,8 @@ public class ExpenseFrame extends JFrame {
             for (Expense exp : expenses) {
                 Row row = sheet.createRow(rowNum++);
                 row.createCell(0).setCellValue(exp.getId());
-                row.createCell(1).setCellValue(exp.getName());
-                row.createCell(2).setCellValue(exp.getAmount());
+                row.createCell(1).setCellValue(exp.getAmount());
+                row.createCell(2).setCellValue(exp.getName());
             }
 
             for (int i = 0; i < columns.length; i++) {
