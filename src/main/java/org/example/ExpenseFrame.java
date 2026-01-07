@@ -19,9 +19,9 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 
 public class ExpenseFrame extends JFrame {
-    private Database db;
-    private JTable table;
-    private DefaultTableModel model;
+    private final Database db;
+    private final JTable table;
+    private final DefaultTableModel model;
 
     /** Az adatbázis-kezelő objektum */
     public ExpenseFrame() {
@@ -31,7 +31,6 @@ public class ExpenseFrame extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
-        /** Az adatbázis-kezelő objektum */
         model = new DefaultTableModel(new String[]{"ID", "Megnevezés", "Összeg (Ft)"}, 0);
         table = new JTable(model);
         JScrollPane scrollPane = new JScrollPane(table);
@@ -151,6 +150,7 @@ public class ExpenseFrame extends JFrame {
             JOptionPane.showMessageDialog(this, "✅ Export sikeres: " + fileToSave.getAbsolutePath());
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "❌ Hiba az exportálás során: " + e.getMessage());
+            //noinspection CallToPrintStackTrace
             e.printStackTrace();
         }
     }
